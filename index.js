@@ -136,3 +136,68 @@ const romanToInt = function(s) {
   }
   return returnedArr.join("-")
 }
+
+// 7. You are going to be given a word. Your job is to return the middle character of the word. 
+// If the word's length is odd, return the middle character. 
+// If the word's length is even, return the middle 2 characters.
+function getMiddle(s) {
+  if (s.length % 2 !== 0) {
+		return s.charAt(Math.floor(s.length / 2))
+  } else return s.charAt(s.length / 2 - 1) + s.charAt(s.length / 2)
+}
+
+// 8. Given a list of integers, determine whether the sum of its elements is odd or even.
+function oddOrEven(array) {
+	const sum = array.reduce((acc, val) => acc + val, 0);
+	return sum % 2 === 0 ? "even" : "odd"
+}
+
+// 9. Дана строка, если символы в строке уникальны заменить на "(", если повторяются заменить на ")"
+function duplicateEncode(word){
+	let result = ""
+	word = word.toLowerCase().split("");
+	for (let i = 0; i < word.length; i++) {
+		if (word.indexOf(word[i]) === word.lastIndexOf(word[i])) {
+			result += "("
+		} else result += ")"
+	}
+	return result
+}
+
+// 10. Проверить является ли переданная строка изограмой.
+function isIsogram(str){
+	let uniqe = "";
+  	let isogram = new Map();
+	for (let i = 0; i < str.length; i++) {
+	  if (!isogram.has(str[i].toLowerCase())) {
+		  isogram.set(str[i].toLowerCase(), i);
+			uniqe += str[i].toLowerCase()
+		  }
+	}
+	return uniqe === str.toLowerCase()
+ }
+
+ // 11. Character with longest consecutive repetition
+ function longestRepetition(s) {
+	const obj = {};
+	let result = {
+		name: "",
+		count: 0
+	};
+	for (let i = 0; i < s.length; i++) {
+		if (i === 0) {
+			obj.name = s[i],
+			obj.count = 1
+			result = {...obj}
+		} else if (s[i] === s[i - 1]) {
+			obj.count += 1
+			if (obj.count > result.count) {
+				result = {...obj}
+			}
+		} else if (s[i] !== s[i - 1]) {
+			obj.name = s[i];
+			obj.count = 1;
+		} 
+	}
+	return [result.name, result.count];
+ }
