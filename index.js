@@ -201,3 +201,63 @@ function isIsogram(str){
 	}
 	return [result.name, result.count];
  }
+
+ // 12. Card Game Alice and Bob are playing a game. The aim of the game is to collect the most cards. The rules:
+// if the number of cards is even, the players can either take half of the cards from the stack, or only 1 card -- as they choose;
+// if the number of cards is odd, the players must take 1 card.
+// Alice starts the game.
+// Return the maximum number of cards Alice can collect, if Bob plays optimally (tries to get as many cards as possible for himself).
+
+function cardGame(n){
+	let cards = BigInt(n)
+	let Alice = 0n;
+	let Bob = 0n;
+	if (cards % 2n === 0n) {
+		while(cards) {
+			if (cards % 2n === 0n) {
+				if ((cards / 2n) % 2n === 0n && cards / 2n !== 2n) {
+					Alice += 1n;
+					cards = cards - 1n;
+				} else {
+					Alice += cards / 2n
+					cards = cards / 2n
+				}
+			} else {
+				Alice += 1n;
+				cards = cards - 1n;
+			}
+			if (cards % 2n === 0n) {
+				Bob += cards / 2n
+				cards = cards / 2n 
+			} else {
+				Bob += 1n;
+				cards = cards - 1n;
+			}
+		}
+	} else {
+		while(cards > 0) {
+			if (cards % 2n === 0n) {
+				Alice += cards / 2n
+				cards = cards / 2n 
+			} else {
+				Alice += 1n;
+				cards = cards - 1n;
+			}
+			if (cards % 2n === 0n) {
+				if ((cards / 2n) % 2n === 0n && cards / 2n !== 2n) {
+					Bob += 1n;
+					cards = cards - 1n;
+				} else {
+					Bob += cards / 2n
+					cards = cards / 2n
+				}
+			} else {
+				Bob += 1n;
+				cards = cards - 1n;
+			}
+		}
+	}
+	return Alice;
+ }
+
+console.log(cardGame(69))
