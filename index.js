@@ -260,4 +260,17 @@ function cardGame(n){
 	return Alice;
  }
 
-console.log(cardGame(69))
+// 13. The Hashtag Generator
+// It must start with a hashtag (#).
+// All words must have their first letter capitalized.
+// If the final result or any word is longer than 140 chars it must return false.
+// If the input or the result is an empty string it must return false.
+ function generateHashtag (str) {
+	let arr = str.split(" ");
+	if (str === "" || str[0] === " ") {
+	  return false
+	} else if (arr.some((el) => el.length >= 140)) {
+		return false
+	} 
+	return "#" + str.split(" ").map((substr) => substr !== "" ? substr[0].toUpperCase() + substr.slice(1) : '').join("")
+ }
