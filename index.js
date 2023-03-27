@@ -274,3 +274,33 @@ function cardGame(n){
 	} 
 	return "#" + str.split(" ").map((substr) => substr !== "" ? substr[0].toUpperCase() + substr.slice(1) : '').join("")
  }
+
+ // 14. sort emotions
+function sortEmotions(arr, order = Boolean) {
+	let emotions = [':D', ':)', ':|', ':(', 'T_T']
+	if (order) {
+		return arr.sort((a, b) => emotions.indexOf(a) - emotions.indexOf(b))
+	}
+	return arr.sort((a,b) => emotions.indexOf(b) - emotions.indexOf(a))
+}
+
+// 15. Pete, the baker.
+// Write a function cakes(), which takes the recipe (object) and the available ingredients (also an object)
+// and returns the maximum number of cakes Pete can bake (integer).  
+// Ingredients that are not present in the objects, can be considered as 0.
+function cakes(recipe, available) {
+	let cakesQuantyti = [];
+	let counterRecipeIng = 0;
+	for (let recipeIng in recipe) {
+		counterRecipeIng++
+		for (let availableIng in available) {
+			if (recipeIng === availableIng) {
+				cakesQuantyti.push(Math.floor(available[availableIng] / recipe[recipeIng]));
+			}
+		}
+	}
+	if (cakesQuantyti.length === counterRecipeIng) {
+		return Math.min(...cakesQuantyti)
+	}
+	return 0
+}
