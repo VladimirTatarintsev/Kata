@@ -304,3 +304,29 @@ function cakes(recipe, available) {
 	}
 	return 0
 }
+
+// 16. Подсчитать все встречающиеся символы в строке. Если у вас есть строка типа aba, результат должен быть {'a': 2, 'b': 1}.
+function count(string) {
+	let obj = {};
+	for (let i = 0; i < string.length; i++) {
+		const currentEl = string[i];
+		if (!(currentEl in obj)) {
+			obj[currentEl] = 1;
+		} else {
+			obj[currentEl] += 1;
+		}
+	}
+	return obj
+ }
+
+ //17. Напишите алгоритм, который берет массив и перемещает все нули в конец, сохраняя порядок остальных элементов.
+function moveZeros(arr) {
+	let array = arr;
+	let zeroArr = [];
+	for (let i = 0; i < array.length; i++) {
+		if (array[i] === 0) zeroArr.push(array[i])
+	}
+	return array.filter((el) => {
+		return el !== 0
+	}).concat(zeroArr)
+}
