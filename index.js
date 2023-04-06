@@ -330,3 +330,27 @@ function moveZeros(arr) {
 		return el !== 0
 	}).concat(zeroArr)
 }
+// 18. Найти кол-во вхождений слов в строку, использовать метод split запрещено.
+const getWordsCount = (str) => {
+	const wordsArray = [];
+	let substr = '';
+	const wordsCount = {};
+	for (let i = 0; i < str.length; i++) {
+		const currentEl = str[i];
+		if (currentEl !== ' ') {
+			substr += str[i]
+		} else {
+			wordsArray.push(substr);
+			substr = '';
+		}
+	}
+	wordsArray.push(substr);
+	
+	for (let i = 0; i < wordsArray.length; i++) {
+		const currentEl = wordsArray[i];
+		currentEl in wordsCount ? wordsCount[currentEl] += 1 : wordsCount[currentEl] = 1
+	}
+	for (let key in wordsCount) {
+		console.log(`${key} - ${wordsCount[key]}`)
+	}
+}
