@@ -354,3 +354,18 @@ const getWordsCount = (str) => {
 		console.log(`${key} - ${wordsCount[key]}`)
 	}
 }
+// С помощью регулярки
+const getWordsCount2 = (str) => {
+	let regExp = /([A-z]*\S)/gm;
+	let word;
+	let wordsArray = [];
+	const wordsCount = {};
+	while (word = regExp.exec(str)) {
+		wordsArray.push(word[1]);
+	}
+	for (let i = 0; i < wordsArray.length; i++) {
+		const currentEl = wordsArray[i];
+		currentEl in wordsCount ? wordsCount[currentEl] += 1 : wordsCount[currentEl] = 1
+	}
+	console.log(wordsCount)
+}
