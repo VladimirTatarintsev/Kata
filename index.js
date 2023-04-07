@@ -369,3 +369,114 @@ const getWordsCount2 = (str) => {
 	}
 	console.log(wordsCount)
 }
+// 19. Найти наибольшее расстояние позиции между совпадающими значениями массива
+const greatestDistance = function(data) {
+	let result = 0;
+	for (let i = 0; i < data.length; i++) {
+		if (data.lastIndexOf(data[i]) - i > result) {
+			result = data.lastIndexOf(data[i]) - i
+		}
+	}
+	console.log(result)
+	return result
+};
+
+//20. parseInt reloaded
+function parseInt(str) {
+	const words = {
+		'zero': 0,
+		'one': 1,
+		'two': 2,
+		'three': 3,
+		'four': 4,
+		'five': 5,
+		'six': 6,
+		'seven': 7,
+		'eight': 8,
+		'nine': 9,
+		'ten': 10,
+		'eleven': 11,
+		'twelve': 12,
+		'thirteen': 13,
+		'fourteen': 14,
+		'fifteen': 15,
+		'sixteen': 16,
+		'seventeen': 17,
+		'eighteen': 18,
+		'nineteen': 19,
+		'twenty': 20,
+		'thirty': 30,
+		'forty': 40,
+		'fifty': 50,
+		'sixty': 60,
+		'seventy': 70,
+		'eighty': 80,
+		'ninety': 90,
+	};
+	const multi = {
+		'hundred': 100,
+		'thousand': 1000,
+		'million': 1000000
+	};
+ return str.split(/ |-/).reduce((value, word) => {
+	if (words[word]) {
+		value += words[word]
+	}
+	if (multi[word]) {
+		value += multi[word] * (value % multi[word]) - (value % multi[word]);
+	}
+	return value
+ },0)
+}
+
+//21. Pagination Helper
+class PaginationHelper {
+	constructor(collection, itemsPerPage) {
+	this.collection = collection;
+  	this.itemsPerPage = itemsPerPage;
+	}
+	itemCount() {
+	  return this.collection.length
+	}
+	pageCount() {
+	  return Math.ceil(this.collection.length / this.itemsPerPage)
+	}
+	pageItemCount(pageIndex) {
+	// возвращает количество элементов на текущей странице. page_index отсчитывается от нуля.
+	// этот метод должен возвращать -1 для значений pageIndex, выходящих за пределы допустимого диапазона.
+    if (pageIndex < 0) {
+		return -1
+	}
+	let count = 0;
+	if (pageIndex === 0) {
+		count = this.collection.slice(0, this.itemsPerPage).length
+	} else if (pageIndex === 1) {
+		count = this.collection.slice(this.itemsPerPage, this.itemsPerPage * (pageIndex + 1)).length
+	} else {
+		count = this.collection.slice(this.itemsPerPage * pageIndex, this.itemsPerPage * (pageIndex + 1)).length
+	}
+	return count <= 0 ? -1 : count
+	}
+	pageIndex(itemIndex) {
+	// определяет, на какой странице находится элемент. Индексы с отсчетом от нуля
+	// этот метод должен возвращать -1 для значений itemIndex, выходящих за пределы допустимого диапазона, а также если коллекция пуста.
+	if (itemIndex >= this.collection.length || itemIndex < 0 || !this.collection.length) {
+		return -1
+	}
+   return Math.floor(itemIndex / this.itemsPerPage) 
+	}
+}
+var helper = new PaginationHelper([1,2,3,1], 5);
+
+//22. Multiples of 3 or 5
+function solution(number){
+	let sum = 0;
+	for (let i = 1; i < number; i++) {
+		if (i % 3 === 0 || i % 5 === 0) {
+			sum += i;
+		} else if (i % 3 === 0 && i % 5 === 0) {
+			sum += i;
+		}
+	}
+	return sum
+}
